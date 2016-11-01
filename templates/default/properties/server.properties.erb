@@ -1,7 +1,7 @@
 # This file is managed by Chef
 # Changes will be overwritten
 
-broker.id=<%= @broker_id %>
+<%= "broker.id=#{@broker_id}" unless @broker_id.nil? %>
 port=<%= @port %>
 zookeeper.connect=<%= @zookeeper_connect %>
 log.dirs=<%= @log_dirs %>

@@ -32,7 +32,7 @@ do_restart = node['apache_kafka']['restart_on_change']
 end
 
 broker_id = node["apache_kafka"]["broker.id"]
-broker_id = 0 if broker_id.nil?
+broker_id = 0 if broker_id.nil? && Gem::Version.new(node['apache_kafka']['version']) < Gem::Version.new('0.9.0.0')
 
 zookeeper_connect = node["apache_kafka"]["zookeeper.connect"]
 zookeeper_connect = "localhost:2181" if zookeeper_connect.nil?
