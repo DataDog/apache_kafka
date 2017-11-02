@@ -80,6 +80,17 @@ when "runit"
     default_logger true
     action [:enable, :start]
   end
+when 'systemd'
+  template '/etc/systemd/system/kafka.service' do
+    notifies :restart, "service[kafka]", :delayed if do_restart
+  end
+
+
+  service 'kafka' do
+    provider Chef::Provider::Service::Systemd
+    supports :status => true, :restart => true, :reload => true
+    action :start
+  end
 else
   Chef::Log.error("You specified an invalid service style for Kafka, but I am continuing.")
 end
